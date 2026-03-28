@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroSleep Detector v1.0 | AI Assistant</title>
+    <meta name="description" content="AI-powered microsleep detection using Teachable Machine. Stay safe, stay awake.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="state-idle">
+        <!-- Background Glow Elements -->
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        
+        <header>
+            <div class="logo">
+                <span class="icon">👁️‍🗨️</span>
+                <h1>MicroSleep <span>Detector</span></h1>
+            </div>
+            <div id="status-badge" class="badge">SISTEMA INACTIVO</div>
+        </header>
+
+        <main>
+            <section class="monitor-section">
+                <div class="webcam-container">
+                    <div id="webcam-wrapper">
+                        <!-- Webcam will be injected here -->
+                        <div id="loader" class="loader-container">
+                            <div class="spinner"></div>
+                            <p>Iniciando Cámara...</p>
+                        </div>
+                        <div class="scanline"></div>
+                        <div class="corners">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls-panel">
+                    <div class="status-card glass">
+                        <div class="current-state">
+                            <span id="state-emoji">💤</span>
+                            <h2 id="state-label">ESPERANDO...</h2>
+                        </div>
+                        
+                        <div class="confidence-bar-container">
+                            <div class="bar-label">Certidumbre de IA: <span id="confidence-value">0%</span></div>
+                            <div class="bar-outer">
+                                <div id="confidence-fill" class="bar-inner" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="monitoring-indicator">
+                            <div class="pulse"></div>
+                            <span id="monitoring-text">Listo para iniciar</span>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button id="start-btn" class="primary-btn">INICIAR MONITOREO</button>
+                        <button id="reset-btn" class="secondary-btn hidden">DETENER Y REINICIAR</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alert Overlay -->
+            <div id="alert-overlay" class="hidden">
+                <div class="alert-content glass">
+                    <div class="alert-header">
+                        <span class="alert-icon">⚠️</span>
+                        <h2>ALERTA DETECTADA</h2>
+                    </div>
+                    <p id="alert-message">Te estás quedando dormido</p>
+                    <button id="snooze-btn" class="alert-btn">ESTOY DESPIERTO</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Teachable Machine AI • Smart Environment Assistant</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
