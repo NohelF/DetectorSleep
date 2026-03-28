@@ -63,10 +63,22 @@ async function init() {
 
         const canvasContainer = document.getElementById("webcam-wrapper");
         canvasContainer.innerHTML = '';
+        
+        // Append the actual canvas object from TM library
         canvasContainer.appendChild(webcam.canvas);
         
-        // Restore decorative elements
-        canvasContainer.innerHTML += '<div class="scanline"></div><div class="corners"><span></span><span></span><span></span><span></span></div>';
+        // Add decorative elements WITHOUT using innerHTML += (which destroys the canvas object)
+        const decorations = document.createElement('div');
+        decorations.innerHTML = `
+            <div class="scanline"></div>
+            <div class="corners">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        `;
+        // Append children one by one or using document fragment
+        while (decorations.firstChild) {
+            canvasContainer.appendChild(decorations.firstChild);
+        }
 
         hideLoading();
         updateUIState('awake');
